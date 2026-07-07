@@ -4,48 +4,54 @@ import os
 from langchain_community.document_loaders import PyPDFLoader
 import cohere
 
+
 st.set_page_config(page_title="Tranquipets AI Agent", page_icon="🐾", layout="wide")
-st.title("🐾🏨 Tranquipets - AI Agent")
-#COLORES CSS
+
+# ESTILOS CSS
 st.markdown(
-    f"""
+    """
     <style>
-    /* 1. Fondo principal de la aplicación */
-    .stApp {{
+    /* Fondo principal de la aplicación */
+    .stApp {
         background-color: #292f36 !important;
-    }}
+    }
 
-    /* Fondo de la barra lateral (opcional, por si quieres mantener la armonía) */
-    [data-testid="stSidebar"] {{
+    /* Fondo de la barra lateral */
+    [data-testid="stSidebar"] {
         background-color: #1f2329 !important;
-    }}
+    }
 
-    /* 2. Burbuja del Asistente (Color claro: #f7fff7) */
-    .stChatMessage[data-testid="stChatMessageAssistant"] {{
+    /* Burbuja del Asistente (Color claro: #f7fff7) */
+    .stChatMessage[data-testid="stChatMessageAssistant"] {
         background-color: #f7fff7 !important;
-        color: #292f36 !important; /* Texto oscuro para que sea legible */
         border-radius: 15px;
         padding: 15px;
         margin-bottom: 10px;
-    }}
+    }
 
-    /* 3. Burbuja del Usuario (Color turquesa: #4ecdc4) */
-    .stChatMessage[data-testid="stChatMessageUser"] {{
+    /* Burbuja del Usuario (Color turquesa: #4ecdc4) */
+    .stChatMessage[data-testid="stChatMessageUser"] {
         background-color: #4ecdc4 !important;
-        color: #292f36 !important; /* Texto oscuro para alto contraste */
         border-radius: 15px;
         padding: 15px;
         margin-bottom: 10px;
-    }}
+    }
     
-    /* Ajuste de color para los iconos de los avatares */
-    .stChatMessage [data-testid="stChatMessageAvatar"] {{
+    /* Forzar color de texto oscuro dentro de las burbujas para máxima legibilidad */
+    .stChatMessage p, .stChatMessage span, .stChatMessage div {
+        color: #292f36 !important;
+    }
+    
+    /* Quitar fondo por defecto de los avatares */
+    .stChatMessage [data-testid="stChatMessageAvatar"] {
         background-color: transparent !important;
-    }}
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
+
+st.title("🐾🏨 Tranquipets - AI Agent")
 
 
 api_key = st.secrets.get("COHERE_API_KEY")
@@ -55,6 +61,7 @@ if not api_key:
 
 
 co = cohere.ClientV2(api_key=api_key)
+
 
 with st.sidebar:
     st.header("📋 Gestión de Documentos")
@@ -84,7 +91,6 @@ def cargar_base_conocimiento(archivos_extra):
     
    
     pdfs_base = ["faq_preguntas-frecuentes.pdf", "politicas_hotel_tranquipets.pdf"]
-    
     for archivo_pdf in pdfs_base:
         if os.path.exists(archivo_pdf):
             loader = PyPDFLoader(archivo_pdf)
@@ -92,9 +98,10 @@ def cargar_base_conocimiento(archivos_extra):
             for p in paginas:
                 textos_contexto.append(f"[Fuente: {archivo_pdf}, Página: {p.metadata.get('page', 0) + 1}] {p.page_content}")
 
-   
+  
     if archivos_extra:
         for pdf_subido in archivos_extra:
+            
             with open(pdf_subido.name, "wb") as f:
                 f.write(pdf_subido.getbuffer())
             
@@ -103,12 +110,14 @@ def cargar_base_conocimiento(archivos_extra):
             for p in paginas:
                 textos_contexto.append(f"[Fuente: PDF Extra ({pdf_subido.name}), Página: {p.metadata.get('page', 0) + 1}] {p.page_content}")
             
+            
             os.remove(pdf_subido.name)
                 
     return "\n\n".join(textos_contexto)
 
 
 contexto_unificado = cargar_base_conocimiento(archivos_nuevos)
+
 
 if "messages" not in st.session_state:
     st.session_state.messages = [
@@ -118,9 +127,11 @@ if "messages" not in st.session_state:
         }
     ]
 
+
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.write(msg["content"])
+
 
 if usuario_input := st.chat_input("Escribe tu consulta para Tranquipets aquí..."):
 
@@ -129,7 +140,7 @@ if usuario_input := st.chat_input("Escribe tu consulta para Tranquipets aquí...
         st.write(usuario_input)
 
     with st.chat_message("assistant"):
-        
+      
         prompt_sistema = (
             "Eres el AI Agent oficial de Tranquipets, un hotel premium para mascotas.\n"
             "Responde de manera profesional, muy amable, empática con los dueños de las mascotas y concisa, basándote estrictamente en el contexto provisto.\n"
@@ -138,8 +149,8 @@ if usuario_input := st.chat_input("Escribe tu consulta para Tranquipets aquí...
         )
         
         try:
-           
             with st.spinner("Revisando los manuales del hotel..."):
+               
                 response = co.chat(
                     model="command-r-plus-08-2024",
                     messages=[
