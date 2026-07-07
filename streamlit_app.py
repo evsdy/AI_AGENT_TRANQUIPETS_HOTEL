@@ -5,53 +5,6 @@ from langchain_community.document_loaders import PyPDFLoader
 import cohere
 
 st.set_page_config(page_title="Tranquipets AI Agent", page_icon="🐾", layout="wide")
-
-
-st.markdown("""
-    <style>
-    /* Fondo de la aplicación principal */
-    .stApp {
-        background-color: #F7F5F0;
-        color: #333333;
-    }
-    
-    /* Personalización de la barra lateral */
-    [data-testid="stSidebar"] {
-        background-color: #E6ECE6 !important;
-        border-right: 1px solid #D1DDD1;
-    }
-    
-    /* Títulos y textos en la barra lateral */
-    [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
-        color: #2E4A3F !important;
-    }
-    
-    /* Cambiar el color de los elementos de código/lista (los PDFs vigentes) */
-    code {
-        color: #8B5A2B !important; /* Tono marrón arcilla suave */
-        background-color: #EFEBE4 !important;
-    }
-    
-    /* Estilo para los títulos principales */
-    h1 {
-        color: #2E4A3F !important; /* Verde bosque profundo */
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
-    
-    /* Líneas divisorias horizontal */
-    hr {
-        border-color: #D1DDD1 !important;
-    }
-
-    /* Ajuste de color para el chat_input fijado abajo */
-    div[data-testid="stChatInput"] textarea {
-        background-color: #FFFFFF !important;
-        color: #333333 !important;
-        border: 1px solid #C4D4C4 !important;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
 st.title("🐾🏨 Tranquipets - AI Agent")
 
 
@@ -67,7 +20,7 @@ with st.sidebar:
     st.header("📋 Gestión de Documentos")
     st.subheader("Subir Nuevas Políticas/Servicios")
     
-  
+   
     archivos_nuevos = st.file_uploader(
         "Carga archivos PDF adicionales (Reglamentos, tarifas, etc.):",
         type=["pdf"],
@@ -89,6 +42,7 @@ with st.sidebar:
 def cargar_base_conocimiento(archivos_extra):
     textos_contexto = []
     
+    
     pdfs_base = ["faq_preguntas-frecuentes.pdf", "politicas_hotel_tranquipets.pdf"]
     
     for archivo_pdf in pdfs_base:
@@ -98,6 +52,7 @@ def cargar_base_conocimiento(archivos_extra):
             for p in paginas:
                 textos_contexto.append(f"[Fuente: {archivo_pdf}, Página: {p.metadata.get('page', 0) + 1}] {p.page_content}")
 
+  
     if archivos_extra:
         for pdf_subido in archivos_extra:
             with open(pdf_subido.name, "wb") as f:
@@ -134,6 +89,7 @@ if usuario_input := st.chat_input("Escribe tu consulta para Tranquipets aquí...
         st.write(usuario_input)
 
     with st.chat_message("assistant"):
+        # Construir el prompt del sistema integrado
         prompt_sistema = (
             "Eres el AI Agent oficial de Tranquipets, un hotel premium para mascotas.\n"
             "Responde de manera profesional, muy amable, empática con los dueños de las mascotas y concisa, basándote estrictamente en el contexto provisto.\n"
@@ -142,6 +98,7 @@ if usuario_input := st.chat_input("Escribe tu consulta para Tranquipets aquí...
         )
         
         try:
+            
             with st.spinner("Revisando los manuales del hotel..."):
                 response = co.chat(
                     model="command-r-plus-08-2024",
