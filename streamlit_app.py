@@ -5,7 +5,7 @@ from langchain_community.document_loaders import PyPDFLoader
 import cohere
 
 st.set_page_config(page_title="Tranquipets AI Agent", page_icon="🐾", layout="wide")
-st.title("🐾🏨 Tranquipets - AI Agent")
+st.title("🐾🏨 Tranqui Pets - AI Agent")
 
 
 api_key = st.secrets.get("COHERE_API_KEY")
@@ -74,7 +74,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = [
         {
             "role": "assistant",
-            "content": "¡Hola! Bienvenidos a Tranquipets 🐾🏨. Soy tu asistente de Inteligencia Artificial. ¿En qué puedo ayudarte hoy respecto a la estadía de tu mascota, nuestros servicios, tarifas o reservas?"
+            "content": "¡Hola! Bienvenidos a Tranqui Pets 🐾🏨. Soy tu asistente de Inteligencia Artificial. ¿En qué puedo ayudarte hoy respecto a la estadía de tu mascota, nuestros servicios, tarifas o reservas?"
         }
     ]
 
@@ -82,7 +82,7 @@ for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.write(msg["content"])
 
-if usuario_input := st.chat_input("Escribe tu consulta para Tranquipets aquí..."):
+if usuario_input := st.chat_input("Escribe tu consulta para Tranqui Pets aquí..."):
 
     st.session_state.messages.append({"role": "user", "content": usuario_input})
     with st.chat_message("user"):
