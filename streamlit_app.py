@@ -6,6 +6,46 @@ import cohere
 
 st.set_page_config(page_title="Tranquipets AI Agent", page_icon="🐾", layout="wide")
 st.title("🐾🏨 Tranquipets - AI Agent")
+#COLORES CSS
+st.markdown(
+    f"""
+    <style>
+    /* 1. Fondo principal de la aplicación */
+    .stApp {{
+        background-color: #292f36 !important;
+    }}
+
+    /* Fondo de la barra lateral (opcional, por si quieres mantener la armonía) */
+    [data-testid="stSidebar"] {{
+        background-color: #1f2329 !important;
+    }}
+
+    /* 2. Burbuja del Asistente (Color claro: #f7fff7) */
+    .stChatMessage[data-testid="stChatMessageAssistant"] {{
+        background-color: #f7fff7 !important;
+        color: #292f36 !important; /* Texto oscuro para que sea legible */
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 10px;
+    }}
+
+    /* 3. Burbuja del Usuario (Color turquesa: #4ecdc4) */
+    .stChatMessage[data-testid="stChatMessageUser"] {{
+        background-color: #4ecdc4 !important;
+        color: #292f36 !important; /* Texto oscuro para alto contraste */
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 10px;
+    }}
+    
+    /* Ajuste de color para los iconos de los avatares */
+    .stChatMessage [data-testid="stChatMessageAvatar"] {{
+        background-color: transparent !important;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
 api_key = st.secrets.get("COHERE_API_KEY")
