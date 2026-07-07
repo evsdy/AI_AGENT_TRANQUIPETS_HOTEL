@@ -4,52 +4,53 @@ import os
 from langchain_community.document_loaders import PyPDFLoader
 import cohere
 
-
 st.set_page_config(page_title="Tranquipets AI Agent", page_icon="🐾", layout="wide")
 
-# ESTILOS CSS
-st.markdown(
-    """
+
+st.markdown("""
     <style>
-    /* Fondo principal de la aplicación */
+    /* Fondo de la aplicación principal */
     .stApp {
-        background-color: #292f36 !important;
+        background-color: #F7F5F0;
+        color: #333333;
     }
-
-    /* Fondo de la barra lateral */
+    
+    /* Personalización de la barra lateral */
     [data-testid="stSidebar"] {
-        background-color: #1f2329 !important;
-    }
-
-    /* Burbuja del Asistente (Color claro: #f7fff7) */
-    .stChatMessage[data-testid="stChatMessageAssistant"] {
-        background-color: #f7fff7 !important;
-        border-radius: 15px;
-        padding: 15px;
-        margin-bottom: 10px;
-    }
-
-    /* Burbuja del Usuario (Color turquesa: #4ecdc4) */
-    .stChatMessage[data-testid="stChatMessageUser"] {
-        background-color: #4ecdc4 !important;
-        border-radius: 15px;
-        padding: 15px;
-        margin-bottom: 10px;
+        background-color: #E6ECE6 !important;
+        border-right: 1px solid #D1DDD1;
     }
     
-    /* Forzar color de texto oscuro dentro de las burbujas para máxima legibilidad */
-    .stChatMessage p, .stChatMessage span, .stChatMessage div {
-        color: #292f36 !important;
+    /* Títulos y textos en la barra lateral */
+    [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
+        color: #2E4A3F !important;
     }
     
-    /* Quitar fondo por defecto de los avatares */
-    .stChatMessage [data-testid="stChatMessageAvatar"] {
-        background-color: transparent !important;
+    /* Cambiar el color de los elementos de código/lista (los PDFs vigentes) */
+    code {
+        color: #8B5A2B !important; /* Tono marrón arcilla suave */
+        background-color: #EFEBE4 !important;
+    }
+    
+    /* Estilo para los títulos principales */
+    h1 {
+        color: #2E4A3F !important; /* Verde bosque profundo */
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    
+    /* Líneas divisorias horizontal */
+    hr {
+        border-color: #D1DDD1 !important;
+    }
+
+    /* Ajuste de color para el chat_input fijado abajo */
+    div[data-testid="stChatInput"] textarea {
+        background-color: #FFFFFF !important;
+        color: #333333 !important;
+        border: 1px solid #C4D4C4 !important;
     }
     </style>
-    """,
-    unsafe_allow_html=True
-)
+""", unsafe_allow_html=True)
 
 st.title("🐾🏨 Tranquipets - AI Agent")
 
@@ -62,12 +63,11 @@ if not api_key:
 
 co = cohere.ClientV2(api_key=api_key)
 
-
 with st.sidebar:
     st.header("📋 Gestión de Documentos")
     st.subheader("Subir Nuevas Políticas/Servicios")
     
-   
+  
     archivos_nuevos = st.file_uploader(
         "Carga archivos PDF adicionales (Reglamentos, tarifas, etc.):",
         type=["pdf"],
@@ -89,8 +89,8 @@ with st.sidebar:
 def cargar_base_conocimiento(archivos_extra):
     textos_contexto = []
     
-   
     pdfs_base = ["faq_preguntas-frecuentes.pdf", "politicas_hotel_tranquipets.pdf"]
+    
     for archivo_pdf in pdfs_base:
         if os.path.exists(archivo_pdf):
             loader = PyPDFLoader(archivo_pdf)
@@ -98,10 +98,8 @@ def cargar_base_conocimiento(archivos_extra):
             for p in paginas:
                 textos_contexto.append(f"[Fuente: {archivo_pdf}, Página: {p.metadata.get('page', 0) + 1}] {p.page_content}")
 
-  
     if archivos_extra:
         for pdf_subido in archivos_extra:
-            
             with open(pdf_subido.name, "wb") as f:
                 f.write(pdf_subido.getbuffer())
             
@@ -110,14 +108,12 @@ def cargar_base_conocimiento(archivos_extra):
             for p in paginas:
                 textos_contexto.append(f"[Fuente: PDF Extra ({pdf_subido.name}), Página: {p.metadata.get('page', 0) + 1}] {p.page_content}")
             
-            
             os.remove(pdf_subido.name)
                 
     return "\n\n".join(textos_contexto)
 
 
 contexto_unificado = cargar_base_conocimiento(archivos_nuevos)
-
 
 if "messages" not in st.session_state:
     st.session_state.messages = [
@@ -127,11 +123,9 @@ if "messages" not in st.session_state:
         }
     ]
 
-
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.write(msg["content"])
-
 
 if usuario_input := st.chat_input("Escribe tu consulta para Tranquipets aquí..."):
 
@@ -140,7 +134,6 @@ if usuario_input := st.chat_input("Escribe tu consulta para Tranquipets aquí...
         st.write(usuario_input)
 
     with st.chat_message("assistant"):
-      
         prompt_sistema = (
             "Eres el AI Agent oficial de Tranquipets, un hotel premium para mascotas.\n"
             "Responde de manera profesional, muy amable, empática con los dueños de las mascotas y concisa, basándote estrictamente en el contexto provisto.\n"
@@ -150,7 +143,6 @@ if usuario_input := st.chat_input("Escribe tu consulta para Tranquipets aquí...
         
         try:
             with st.spinner("Revisando los manuales del hotel..."):
-               
                 response = co.chat(
                     model="command-r-plus-08-2024",
                     messages=[
