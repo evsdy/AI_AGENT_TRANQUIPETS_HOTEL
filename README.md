@@ -86,11 +86,13 @@ La aplicación se abrirá automáticamente en tu navegador web local en la direc
 
 
 1. ¿Cuáles son los horarios de check-in y check-out para el hotel de mascotas?
+
 Los horarios de ingreso (check-in) son de lunes a sábado de 8:00 AM a 11:00 AM. Es importante destacar que no se reciben mascotas por la tarde para garantizar un tiempo de adaptación antes de la noche.
 
 En cuanto a las salidas (check-out), estas se realizan de lunes a domingo de 9:00 AM a 12:00 PM. Si se realiza una salida tardía, se aplicará un cargo adicional.
 
 2. ¿Qué requisitos médicos o vacunas solicitan antes de recibir a un perrito?
+
 Para garantizar la salud y seguridad de todos los huéspedes, Tranqui Pets requiere que los perros cumplan con ciertos requisitos médicos antes de su ingreso:
 
 Vacunas: Es obligatorio que el perro tenga la cartilla de vacunación al día y que se le hayan aplicado las vacunas de la Rabia, la Séxtuple y la Bordetella (tos de las perreras) al menos 15 días antes de su llegada al hotel.
@@ -101,10 +103,12 @@ Evaluación de temperamento: Los perros que visitan Tranqui Pets por primera vez
 
 Recuerda que es importante cumplir con estos requisitos para poder ingresar a tu mascota al hotel. Si tienes alguna duda sobre la cartilla de vacunación o los requisitos, no dudes en consultar con tu veterinario o ponerte en contacto con nosotros.
 
-3. ¿Cuáles son las tarifas vigentes por noche para habitaciones VIP?
+3. ¿Cuáles son las tarifas vigentes por noche para habitaciones VIP?  
+
 Lamento informarte que no encuentro información sobre las tarifas vigentes para habitaciones VIP en los manuales actuales del hotel Tranqui Pets. Si deseas conocer los precios y las opciones disponibles, te recomiendo contactar directamente al hotel para obtener los detalles más recientes. Estarán encantados de brindarte toda la información que necesites.
 
 4. ¿Qué protocolo siguen si mi mascota requiere administración de medicamentos?
+
 El personal de Tranqui Pets puede administrar medicamentos a su mascota por vía oral o tópica sin costo adicional. Para ello, es necesario que usted, como dueño, proporcione la receta médica firmada y las instrucciones claras por escrito sobre el horario y la dosis de la medicación. Es importante destacar que no se aplican medicamentos inyectables.
 
 Recuerde que es su responsabilidad entregar la medicación y la información necesaria para que el personal pueda administrarla adecuadamente durante la estadía de su mascota en el hotel.
