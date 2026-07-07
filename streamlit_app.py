@@ -28,7 +28,7 @@ with st.sidebar:
     st.write("---")
     st.subheader("📚 Documentos Vigentes")
    
-       documentos_activos = ["faq_preguntas-frecuentes.pdf", "politicas_hotel_tranquipets.pdf"]
+    documentos_activos = ["faq_preguntas-frecuentes.pdf", "politicas_hotel_tranquipets.pdf"]
     if archivos_nuevos:
         for f in archivos_nuevos:
             documentos_activos.append(f"🆕 {f.name} (En memoria)")
