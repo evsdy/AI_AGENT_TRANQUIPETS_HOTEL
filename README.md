@@ -113,4 +113,8 @@ El personal de Tranqui Pets puede administrar medicamentos a su mascota por vía
 
 Recuerde que es su responsabilidad entregar la medicación y la información necesaria para que el personal pueda administrarla adecuadamente durante la estadía de su mascota en el hotel.
 
+<img width="1469" height="786" alt="thumbnail" src="https://github.com/user-attachments/assets/1260d632-6b11-4f9f-bf19-e05df01c316e" />
+📎link: https://tranquipets-hotel.streamlit.app/
+
+
 
