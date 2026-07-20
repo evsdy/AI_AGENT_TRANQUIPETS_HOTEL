@@ -43,7 +43,7 @@ El proyecto utiliza un stack tecnológico moderno y eficiente optimizado para en
 
 ### 1. Clonar el repositorio
 ```bash
-git clone [https://github.com/TU_USUARIO/ai_agent_tranquipets_hotel.git](https://github.com/TU_USUARIO/ai_agent_tranquipets_hotel.git)
+git clone https://github.com/evsdy/AI_AGENT_TRANQUIPETS_HOTEL.git 
 cd ai_agent_tranquipets_hotel 
 ```
 
@@ -69,7 +69,7 @@ La aplicación se abrirá automáticamente en tu navegador web local en la direc
 
 ---
 
-💬 Ejemplos de Interacción con el Agente
+# 💬 Ejemplos de Interacción con el Agente
 
 ## ❓ Ejemplos de preguntas que el agente puede responder:
 
@@ -113,8 +113,20 @@ El personal de Tranqui Pets puede administrar medicamentos a su mascota por vía
 
 Recuerde que es su responsabilidad entregar la medicación y la información necesaria para que el personal pueda administrarla adecuadamente durante la estadía de su mascota en el hotel.
 
-<img width="1469" height="786" alt="thumbnail" src="https://github.com/user-attachments/assets/1260d632-6b11-4f9f-bf19-e05df01c316e" />
-📎link: https://tranquipets-hotel.streamlit.app/
+## 📸 Vista Previa de la Interfaz
+A continuación puedes ver cómo luce el panel de control y el flujo de conversación de Tranquipets:
+
+1. Panel Principal y Documentación
+Aquí se gestionan las preguntas y políticas del hotel desde la barra lateral.
+
+<img width="1470" height="834" alt="Captura de pantalla 2026-07-20 a la(s) 2 58 17 p  m" src="https://github.com/user-attachments/assets/97901213-2366-47da-ba56-f3c896b2283d" />
 
 
+2. Flujo de Chat con el Agente
+Demostración de una consulta en tiempo real utilizando una paleta fria y minimalista.
 
+
+<img width="1168" height="786" alt="thumbnail" src="https://github.com/user-attachments/assets/9b934230-6abf-47f9-9567-098098be18c9" />
+
+## 📎 Link: 
+https://tranquipets-hotel.streamlit.app/
